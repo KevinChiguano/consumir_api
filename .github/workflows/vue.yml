@@ -10,7 +10,7 @@ jobs:
       mysql:
         image: mysql:8.0
         ports:
-          3086:3086
+          - 3086:3086
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: vue
