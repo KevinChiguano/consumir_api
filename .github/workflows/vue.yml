@@ -6,7 +6,7 @@ jobs:
   vue-test:
     runs-on: ubuntu-latest
 
-    service:
+    services:
       mysql:
         image: mysql:8.0
         ports:
