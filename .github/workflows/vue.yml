@@ -1,0 +1,29 @@
+name: Vue CI
+
+on: [push]
+
+jobs:
+  vue-test:
+    runs-on: ubuntu-latest
+
+    service:
+      mysql:
+        image: mysql:8.0
+        ports:
+          3086:3086
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: vue
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Set Up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extentions: mbstring, bcmath, pdo, pdo_mysql
+
+      - name: Install packages
+        run: composer install --no-interaction
