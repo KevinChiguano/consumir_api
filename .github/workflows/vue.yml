@@ -1,4 +1,4 @@
-name: Vue CI
+name: Vue.js CI
 
 on: [push]
 
@@ -6,24 +6,24 @@ jobs:
   vue-test:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8.0
-        ports:
-          - 3086:3086
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: vue
-
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
       
-      - name: Set Up PHP
-        uses: shivammathur/setup-php@v2
+      # Configura Node.js en la versión deseada (por ejemplo, la 16.x)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          php-version: 8.2
-          extentions: mbstring, bcmath, pdo, pdo_mysql
+          node-version: '16.x'
 
-      - name: Install packages
-        run: composer install --no-interaction
+      # Instalar dependencias del proyecto Vue.js
+      - name: Install dependencies
+        run: npm install
+
+      # Ejecutar las pruebas del proyecto (asegúrate de tener pruebas configuradas en tu package.json)
+      - name: Run tests
+        run: npm run test
+
+      # Compilar el proyecto Vue.js para producción
+      - name: Build project
+        run: npm run build
